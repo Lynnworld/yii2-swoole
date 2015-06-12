@@ -39,7 +39,7 @@ class Response extends yii\web\Response
     public function init()
     {
         if ($this->version === null) {
-            if (isset(\Yii::$app->request->swoole->server['SERVER_PROTOCOL']) && \Yii::$app->request->swoole->server['SERVER_PROTOCOL'] === 'HTTP/1.0') {
+            if (isset($_SERVER['SERVER_PROTOCOL']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.0') {
                 $this->version = '1.0';
             } else {
                 $this->version = '1.1';
@@ -129,10 +129,10 @@ class Response extends yii\web\Response
      */
     protected function getHttpRange($fileSize)
     {
-        if (!isset(\Yii::$app->request->swoole->server['HTTP_RANGE']) || \Yii::$app->request->swoole->server['HTTP_RANGE'] === '-') {
+        if (!isset($_SERVER['HTTP_RANGE']) || $_SERVER['HTTP_RANGE'] === '-') {
             return [0, $fileSize - 1];
         }
-        if (!preg_match('/^bytes=(\d*)-(\d*)$/', \Yii::$app->request->swoole->server['HTTP_RANGE'], $matches)) {
+        if (!preg_match('/^bytes=(\d*)-(\d*)$/', $_SERVER['HTTP_RANGE'], $matches)) {
             return false;
         }
         if ($matches[1] === '') {

@@ -150,6 +150,7 @@ class AppServer extends Component
         $request->server['SCRIPT_FILENAME'] = 'index.php';
         $request->server['SCRIPT_NAME'] = 'index.php';
         unset($request->server['PHP_SELF']);
+        $request->setGlobal();
         $config=$this->yiiConfig;
         foreach($this->persistent as $name){
             if(isset($this->_persistentObject[$name])){
@@ -157,7 +158,7 @@ class AppServer extends Component
                 $config['components'][$name]=$this->_persistentObject[$name];
             }
         }
-
+        $config['components']['response']['swoole']=$response;
         $app=new $this->application($config);
         $app->run();
         $this->trigger(self::EVENT_AFTER_REQUEST);
