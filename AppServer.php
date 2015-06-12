@@ -80,6 +80,7 @@ class AppServer extends Component
         $this->server=new \swoole_http_server($this->ip,$this->port,$this->mode,$this->tcp_or_udp);
         parent::__construct($config);
         $this->server->set($swooleConfig);
+        $this->server->setGlobal(HTTP_GLOBAL_ALL);
         self::$_instance=$this;
     }
 
@@ -146,7 +147,6 @@ class AppServer extends Component
         $request->server['SCRIPT_FILENAME'] = 'index.php';
         $request->server['SCRIPT_NAME'] = 'index.php';
         unset($request->server['PHP_SELF']);
-        $request->setGlobal();
         $config=$this->yiiConfig;
         foreach($this->persistent as $name){
             if(isset($this->_persistentObject[$name])){
