@@ -74,17 +74,13 @@ class AppServer extends Component
         }else{
             $this->yiiConfig=$config['yii'];
             unset($config['yii']);
-        }if(!isset($config['worker'])){
-            throw new \Exception("No swoole server configure");
         }
         $swooleConfig=isset($config['worker'])?$config['worker']:[];
         unset($config['worker']);
-        parent::__construct($config);
-
         $this->server=new \swoole_http_server($this->ip,$this->port,$this->mode,$this->tcp_or_udp);
+        parent::__construct($config);
         $this->server->set($swooleConfig);
-        self::$instance=$this;
-        $this->init();
+        self::$_instance=$this;
     }
 
     /**
@@ -169,4 +165,7 @@ class AppServer extends Component
         }
     }
 
+    public function run(){
+        $this->server->start();
+    }
 }
