@@ -1,0 +1,30 @@
+{
+  "name": "lynn/yii2-swoole",
+  "description": "Yii 2 swoole support",
+  "keywords": [
+    "yii2",
+    "swoole"
+  ],
+  "homepage": "https://github.com/Lynnworld/yii2-swoole",
+  "license": "BSD-3-Clause",
+  "support": {
+    "source": "https://github.com/Lynnworld/yii2-swoole"
+  },
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Lynn",
+      "email": "lynnworld7@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": ">=2.0.4"
+  },
+  "config": {
+    "process-timeout": 1800
+  }
+
+}
