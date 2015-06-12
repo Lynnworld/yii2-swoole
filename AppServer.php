@@ -160,7 +160,7 @@ class AppServer extends Component
         $this->trigger(self::EVENT_AFTER_REQUEST);
         foreach($this->persistent as $name){
             if(!isset($this->_persistentObject[$name])){
-                $this->_persistentObject[$name]=$app[$name];
+                $this->_persistentObject[$name]=$app->get($name);
             }
         }
     }
