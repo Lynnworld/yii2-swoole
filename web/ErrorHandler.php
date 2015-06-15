@@ -25,6 +25,7 @@ class ErrorHandler extends \yii\web\ErrorHandler
      */
     public function register()
     {
+        $this->unregister();
         ini_set('display_errors', false);
         set_exception_handler([$this, 'handleException']);
         set_error_handler([$this, 'handleError']);
